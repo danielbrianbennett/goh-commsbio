@@ -11,6 +11,7 @@ fig_2b_data <- read.csv(file.path("data", "Fig2b_data.csv"))
 fig_2c_data <- read.csv(file.path("data", "Fig2c_data.csv"))
 fig_2d_data <- read.csv(file.path("data", "Fig2d_data.csv"))
 fig_3_data  <- read.csv(file.path("data", "Fig3_data.csv"))
+fig_4_data  <- read.csv(file.path("data", "Fig4_data.csv"))
 
 # Figure 2a plot
 fig_2a_data$effort_level <- factor(fig_2a_data$effort_level)
@@ -124,3 +125,59 @@ fig_3_plot <- ggplot(data=fig_3_data, mapping=aes(x=k_w, y=k_i)) +
         axis.text = element_text(size=12, colour="black")
   ) +
   coord_capped_cart(left="both", bottom="both")
+
+# Figure 4A plot
+fig_4a_plot <- ggplot(data=fig_4_data, mapping=aes(y=scenario_info)) +
+  geom_boxplot()  +
+  theme_bw() + 
+  scale_y_continuous(limits=c(-3, 9), breaks=c(-2,0,2,4,6,8), name='Parameter Estimate') +
+  scale_x_continuous(name="Scenario\n", breaks=c()) +
+  geom_hline(yintercept = 0) +
+  theme(legend.position = "right",
+        axis.line = element_line(colour = "black"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        axis.title.x = element_text(size=16, face="bold"),
+        axis.title.y = element_text(size=16, face="bold"),
+        axis.text = element_text(size=12, colour="black")
+  )
+
+fig_4b_plot <- ggplot(data=fig_4_data, mapping=aes(y=reveal)) +
+  geom_boxplot()  +
+  theme_bw() + 
+  scale_y_continuous(limits=c(-15, 35), breaks=c(-10,-5,0,5,10,15,20,25,30), name='Parameter Estimate') +
+  scale_x_continuous(name="Reveal\nEvent", breaks=c()) +
+  geom_hline(yintercept = 0) +
+  theme(legend.position = "right",
+        axis.line = element_line(colour = "black"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        axis.title.x = element_text(size=16, face="bold"),
+        axis.title.y = element_text(size=16,  face="bold"),
+        axis.text = element_text(size=12, colour="black")
+  )
+
+fig_4c_plot <- ggplot(data=fig_4_data, mapping=aes(y=outcome)) +
+  geom_boxplot()  +
+  theme_bw() + 
+  scale_y_continuous(limits=c(-15, 35), breaks=c(-10,-5,0,5,10,15,20,25,30), name='Parameter Estimate') +
+  scale_x_continuous(name="Outcome\n", breaks=c()) +
+  geom_hline(yintercept = 0) +
+  theme(legend.position = "right",
+        axis.line = element_line(colour = "black"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        axis.title.x = element_text(size=16, face="bold"),
+        axis.title.y = element_text(size=16, face="bold"),
+        axis.text = element_text(size=12, colour="black")
+  )
+
+fig_4_plot <- grid.arrange(fig_4a_plot, fig_4b_plot, fig_4c_plot, nrow=1)
+
+
